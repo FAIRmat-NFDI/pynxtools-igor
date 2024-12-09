@@ -36,7 +36,7 @@ $<entry-file path> \
 
 You can find various examples how to use `pynxtools-igor` for your Igor Pro research data pipeline in [`src/pynxtools-igor/nomad/examples`](../../src/pynxtools_igor/nomad/examples/). These are designed for working with [`NOMAD`](https://nomad-lab.eu/) and its [`NOMAD Remote Tools Hub (NORTH)`](https://nomad-lab.eu/prod/v1/gui/analyze/north).
 
-There are also small example files for using the `pynxtools` dataconverter with the `igor` reader in [`tests/data`](https://github.com/FAIRmat-NFDI/pynxtools.mpes/tree/main/tests/data).
+There are also small example files for using the `pynxtools` dataconverter with the `igor` reader in [`tests/data`](https://github.com/FAIRmat-NFDI/pynxtools-igor/tree/main/tests/data).
 
 For this tutorial, we will work with this data. You can run the conversion as
 ```shell
