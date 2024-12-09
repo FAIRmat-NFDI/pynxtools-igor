@@ -26,7 +26,7 @@ classifiers = [
 dependencies = [
     "h5py>=3.6.0",
     "xarray>=0.20.2",
-    "pynxtools @ git+https://github.com/FAIRmat-NFDI/pynxtools.git",
+    "pynxtools>=0.9.2",
     "igor2>=0.5.8",
 ]
 
