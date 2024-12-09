@@ -12,7 +12,7 @@ This entry dict can be passed as an object, in which case it is expected as sole
 ## Conversion from Igor packed experiment files
 Conversion from ``.pxp`` files requires definition of an entry dict. Here also, each key/value defines one entry to generate in the Nexus file. the ``data`` entry contains here the ibw-path to the wave to use as main data entry. Axis information can be either read from the wave scaling, or be provided via an ``axisN`` entry, pointing to a wave containing axis information. Similarly, a ``data_errors`` key can be defined, pointing to a wave containing data uncertainties.
 
-The reader for Igor Pro data can be found [here](https://github.com/FAIRmat-NFDI/pynxtools-mpes/blob/main/src/pynxtools_igor/reader.py).
+The reader for Igor Pro data can be found [here](https://github.com/FAIRmat-NFDI/pynxtools-igor/blob/main/src/pynxtools_igor/reader.py).
 
 Example data for the igor reader is available [here](https://github.com/FAIRmat-NFDI/pynxtools-igor/tree/main/tests/data).
 
