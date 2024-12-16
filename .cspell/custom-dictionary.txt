@@ -17,6 +17,7 @@ FEMTOSPEX
 fluence
 fluences
 Forschungsgemeinschaft
+Igor
 infile
 inlinehilite
 ipynb
