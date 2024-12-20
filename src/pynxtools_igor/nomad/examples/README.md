@@ -1,6 +1,6 @@
 # Introduction
 
-This example presents the capabilities of NOMAD platform to convert and and standardize data stored with Wavemetrics [Igor Pro](https://www.wavemetrics.com/) into the [NeXus](https://www.nexusformat.org/) format.
+This example presents the capabilities of the NOMAD platform to convert and and standardize data stored with Wavemetrics [Igor Pro](https://www.wavemetrics.com/) into the [NeXus](https://www.nexusformat.org/) format.
 
 It contains two examples:
 - Converting Igor Binary Wave (.ibw) and packed experiment  (.pxp) into NeXus files.
