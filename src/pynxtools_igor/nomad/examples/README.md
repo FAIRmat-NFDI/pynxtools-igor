@@ -28,4 +28,4 @@ From here you find detailed instructions inside each of the notebooks.
 If you're interested in using this pipeline and NOMAD in general you'll find support at [FAIRmat](https://www.fairmat-nfdi.eu/fairmat/consortium).
 
 For general questions regarding the Igor pipeline and if you're interested in building one for your
-own research workflow, you may contact [Laurenz Rettig](https://www.fairmat-nfdi.eu/fairmat/fairmat_/fairmatteam) and [Lukas Pielsticker](https://www.fairmat-nfdi.eu/fairmat/fairmat_/fairmatteam) from the FAIRmat consortium.
+own research workflow, you may contact [Laurenz Rettig](https://www.fair-di.eu/fairmat/about-fairmat/team-fairmat) and [Lukas Pielsticker](https://www.fair-di.eu/fairmat/about-fairmat/team-fairmat) from the FAIRmat consortium.
