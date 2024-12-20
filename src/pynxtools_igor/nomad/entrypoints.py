@@ -28,7 +28,7 @@ igor_example = ExampleUploadEntryPoint(
     title="Igor Reader",
     category="FAIRmat examples",
     description="""
-        This example presents the capabilities of NOMAD platform to convert and
+        This example presents the capabilities of the NOMAD platform to convert and
         and standardize data stored with Wavemetrics [Igor Pro](https://www.wavemetrics.com/) into the
         [NeXus](https://www.nexusformat.org/) format.
 
