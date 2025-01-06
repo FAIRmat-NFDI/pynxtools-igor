@@ -28,7 +28,14 @@ igor_example = ExampleUploadEntryPoint(
     title="Igor Reader",
     category="FAIRmat examples",
     description="""
-        Description tbd
+        This example presents the capabilities of the NOMAD platform to convert and
+        and standardize data stored with Wavemetrics [Igor Pro](https://www.wavemetrics.com/) into the
+        [NeXus](https://www.nexusformat.org/) format.
+
+        It contains two examples:
+        - Converting Igor Binary Wave (.ibw) and packed experiment  (.pxp) into NeXus files.
+        - An example conversion of time-resolved resonant diffraction data into the standardized
+          NeXus format for X-ray diffraction, [NXxrd](https://fairmat-nfdi.github.io/nexus_definitions/classes/contributed_definitions/NXxrd.html).
     """,
     plugin_package="pynxtools_igor",
     resources=["nomad/examples/*"],
