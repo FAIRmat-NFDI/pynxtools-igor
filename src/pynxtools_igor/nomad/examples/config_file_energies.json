@@ -25,26 +25,27 @@
             "incident_polarization/@units": "V^2/mm^2"
         },
         "DETECTOR[detector]": {
-            "amplifier_type": "APD",
-            "detector_type": "APD",
-            "amplifier_voltage": 150,
-            "amplifier_voltage/@units": "V"
+          "type": "APD",
+          "acquisition_mode": "event",
+          "COLLECTION[detector_parameters]": {
+              "amplifier_voltage": 150,
+              "amplifier_voltage/@units": "V"
           }
+        }
     },
     "/ENTRY/SAMPLE[sample]": {
         "description": "['@eln:/ENTRY/Sample/description', '@attrs:sample/chemical_formula']",
         "name": "['@eln:/ENTRY/Sample/name', '@attrs:sample/name']",
         "situation": "vacuum",
         "chemical_formula": "['@eln:/ENTRY/Sample/chemical_formula', '@attrs:sample/chemical_formula']",
-        "temperature": "20",
+        "temperature": "@attrs:sample/temperature",
         "temperature/@units": "K"
   },
   "/ENTRY/DATA[data]/@axes": "@data:dims",
   "/ENTRY/DATA[data]/@signal": "data",
   "/ENTRY/DATA[data]/AXISNAME_indices[@*_indices]": "@data:*.index",
-  "/ENTRY/DATA[data]/data": "@data:data",
-  "/ENTRY/DATA[data]/data_errors": "@data:data.errors",  
-  "/ENTRY/DATA[data]/data/@units": "@data:data.units",
+  "/ENTRY/DATA[data]/DATA[data]": "@data:data",
+  "/ENTRY/DATA[data]/DATA[data]/@units": "@data:data.units",
   "/ENTRY/DATA[data]/AXISNAME[*]": "@data:*.data",
   "/ENTRY/DATA[data]/AXISNAME[*]/@units": "@data:*.units"
 }

@@ -7,6 +7,7 @@ Bessy
 binarywave
 bnote
 caplog
+codemirror
 configfile
 dataconverter
 Dobener
@@ -14,6 +15,7 @@ dsml
 Dyna
 Ecut
 FEMTOSPEX
+FIELDNAME
 fluence
 fluences
 fontawesome

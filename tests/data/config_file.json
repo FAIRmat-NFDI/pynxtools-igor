@@ -3,8 +3,8 @@
     "/ENTRY/DATA[data]/@axes": "@data:dims",
     "/ENTRY/DATA[data]/AXISNAME_indices[@*_indices]": "@data:*.index",
     "/ENTRY/DATA[data]/@signal": "data",
-    "/ENTRY/DATA[data]/data": "@data:data",
-    "/ENTRY/DATA[data]/data/@units": "@data:data.units",
+    "/ENTRY/DATA[data]/DATA[data]": "@data:data",
+    "/ENTRY/DATA[data]/DATA[data]/@units": "@data:data.units",
     "/ENTRY/DATA[data]/AXISNAME[*]": "@data:*.data",
     "/ENTRY/DATA[data]/AXISNAME[*]/@units": "@data:*.units"
 }

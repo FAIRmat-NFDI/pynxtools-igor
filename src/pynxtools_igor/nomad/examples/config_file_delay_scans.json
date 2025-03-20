@@ -12,7 +12,7 @@
             "name": "Bessy II",
             "probe": "x-ray",
             "type": "Synchrotron X-ray Source",
-            "mode": "Slicing"
+            "mode": "Single Bunch"
         },
         "BEAM[beam_probe]": {
             "distance": 0.0,
@@ -32,9 +32,9 @@
         "BEAM[beam_pump]": {
             "distance": 0.0,
             "distance/@units": "mm",
-            "incident_energy": "1.55",
+            "incident_energy": 1.55,
             "incident_energy/@units": "eV",
-            "pulse_duration": "['@eln:/ENTRY/Instrument/Beam/Probe/pulse_duration', '50']",
+            "pulse_duration": "['@eln:/ENTRY/Instrument/Beam/Pump/pulse_duration', '50.']",
             "pulse_duration/@units": "fs",
             "incident_polarization": [1, 1, 0, 0],
             "incident_polarization/@units": "V^2/mm^2",
@@ -42,26 +42,28 @@
             "fluence/@units": "mJ/cm^2"
         },
         "DETECTOR[detector]": {
-            "amplifier_type": "APD",
-            "detector_type": "APD",
-            "amplifier_voltage": 150,
-            "amplifier_voltage/@units": "V"
+            "type": "APD",
+            "acquisition_mode": "event",
+            "COLLECTION[detector_parameters]": {
+                "amplifier_voltage": 150,
+                "amplifier_voltage/@units": "V"
+            }
           }
     },
     "/ENTRY/SAMPLE[sample]": {
         "description": "['@eln:/ENTRY/Sample/description', '@attrs:sample/chemical_formula']",
         "name": "['@eln:/ENTRY/Sample/name', '@attrs:sample/name']",
         "situation": "vacuum",
-        "SUBSTANCE[substance]/molecular_formula_hill": "['@eln:/ENTRY/Sample/chemical_formula', '@attrs:sample/chemical_formula']",
+        "chemical_formula": "['@eln:/ENTRY/Sample/chemical_formula', '@attrs:sample/chemical_formula']",
         "temperature": "@attrs:sample/temperature",
         "temperature/@units": "K"
   },
   "/ENTRY/DATA[data]/@axes": "@data:dims",
   "/ENTRY/DATA[data]/@signal": "data",
   "/ENTRY/DATA[data]/AXISNAME_indices[@*_indices]": "@data:*.index",
-  "/ENTRY/DATA[data]/data": "@data:data",
-  "/ENTRY/DATA[data]/data_errors": "@data:data.errors",  
-  "/ENTRY/DATA[data]/data/@units": "@data:data.units",
+  "/ENTRY/DATA[data]/DATA[data]": "@data:data",
+  "/ENTRY/DATA[data]/FIELDNAME_errors[data_errors]": "@data:data.errors",  
+  "/ENTRY/DATA[data]/DATA[data]/@units": "@data:data.units",
   "/ENTRY/DATA[data]/AXISNAME[*]": "@data:*.data",
   "/ENTRY/DATA[data]/AXISNAME[*]/@units": "@data:*.units"
 }
