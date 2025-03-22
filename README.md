@@ -1,11 +1,11 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-![](https://github.com/rettigl/pynxtools-igor/actions/workflows/pytest.yml/badge.svg)
-![](https://github.com/rettigl/pynxtools-igor/actions/workflows/pylint.yml/badge.svg)
-![](https://github.com/rettigl/pynxtools-igor/actions/workflows/publish.yml/badge.svg)
+![](https://github.com/FAIRmat-NFDI/pynxtools-igor/actions/workflows/pytest.yml/badge.svg)
+![](https://github.com/FAIRmat-NFDI/pynxtools-igor/actions/workflows/pylint.yml/badge.svg)
+![](https://github.com/FAIRmat-NFDI/pynxtools-igor/actions/workflows/publish.yml/badge.svg)
 ![](https://img.shields.io/pypi/pyversions/pynxtools-igor)
 ![](https://img.shields.io/pypi/l/pynxtools-igor)
 ![](https://img.shields.io/pypi/v/pynxtools-igor)
-![](https://coveralls.io/repos/github/rettigl/pynxtools-igor/badge.svg?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/FAIRmat-NFDI/pynxtools-igor/badge.svg?branch=main&kill_cache=1)](https://coveralls.io/github/FAIRmat-NFDI/pynxtools-igor?branch=main)
 
 # A reader for Wavemetrics Igor Pro data
 
