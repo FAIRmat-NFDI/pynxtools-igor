@@ -26,9 +26,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python_version }}
-      - name: Install uv
+      - name: Install dependencies
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
+          uv pip install coverage coveralls
       - name: Install nomad
         if: "${{ matrix.python_version != '3.8' && matrix.python_version != '3.9'}}"
         run: |
