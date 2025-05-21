@@ -1,7 +1,7 @@
 {
     "/ENTRY/title": "['@eln:/ENTRY/title', '@attrs:entry_title', '']",
     "/ENTRY/DATA[data]/@axes": "@data:dims",
-    "/ENTRY/DATA[data]/AXISNAME_indices[@*_indices]": "@data:*.index",
+    "/ENTRY/DATA[data]/@AXISNAME_indices[@*_indices]": "@data:*.index",
     "/ENTRY/DATA[data]/@signal": "data",
     "/ENTRY/DATA[data]/DATA[data]": "@data:data",
     "/ENTRY/DATA[data]/DATA[data]/@units": "@data:data.units",
