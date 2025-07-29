@@ -26,7 +26,7 @@ except ImportError as exc:
 
 igor_example = ExampleUploadEntryPoint(
     title="Igor Reader",
-    category="FAIRmat examples",
+    category="NeXus Experiment Examples",
     description="""
         This example presents the capabilities of the NOMAD platform to convert and
         and standardize data stored with Wavemetrics [Igor Pro](https://www.wavemetrics.com/) into the
