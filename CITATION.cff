@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 title: 'pynxtools-igor: A pynxtools reader plugin for Wavemetrics Igor Pro data'
-version: 0.1.2
+version: 0.1.3
 message:
   If you use this software, please cite it using the
   metadata from this file.
@@ -16,9 +16,9 @@ authors:
     family-names: Pielsticker
     orcid: 'https://orcid.org/0000-0001-9361-8333'
 
-doi: TODO
+doi: 10.5281/zenodo.15083998
 repository-code: 'https://github.com/FAIRmat-NFDI/pynxtools-igor'
-url: TODO
+url: https://zenodo.org/records/15083998
 keywords:
   - Wavemetrics
   - Igor Pro

@@ -6,6 +6,9 @@
 ![](https://img.shields.io/pypi/l/pynxtools-igor)
 ![](https://img.shields.io/pypi/v/pynxtools-igor)
 [![Coverage Status](https://coveralls.io/repos/github/FAIRmat-NFDI/pynxtools-igor/badge.svg?branch=main&kill_cache=1)](https://coveralls.io/github/FAIRmat-NFDI/pynxtools-igor?branch=main)
+[![DOI](https://zenodo.org/badge/759916501.svg)](https://doi.org/10.5281/zenodo.15083998)
+
+https://zenodo.org/records/15498240
 
 # A reader for Wavemetrics Igor Pro data
 
