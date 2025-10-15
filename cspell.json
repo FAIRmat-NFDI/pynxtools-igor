@@ -14,7 +14,11 @@
             "addWords": true
         }
     ],
-    "dictionaries": [  "custom-dictionary", "python"
+    "import": ["@cspell/dict-scientific-terms-us/cspell-ext.json"],
+    "dictionaries": [
+        "custom-dictionary",
+        "scientific_terms_US",
+        "python"
     ],
     "words": [],
     "ignoreWords": [],
