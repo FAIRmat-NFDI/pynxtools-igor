@@ -5,7 +5,7 @@
         "*.toml",
         "Makefile",
         "*.bat",
-        "*.egg-info",
+        "*.egg-info"
     ],
     "dictionaryDefinitions": [
         {
