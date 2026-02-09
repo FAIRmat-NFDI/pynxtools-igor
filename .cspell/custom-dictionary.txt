@@ -38,6 +38,7 @@ inlinehilite
 ipynb
 kernelspec
 linenums
+lukaspie
 mainfile
 ndarray
 nxdl
@@ -45,5 +46,6 @@ nxdls
 orcid
 pymdownx
 pynxtools
+rettigl
 superfences
 voigt
