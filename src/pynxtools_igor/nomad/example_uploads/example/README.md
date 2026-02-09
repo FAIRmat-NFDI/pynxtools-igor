@@ -1,4 +1,4 @@
-# IGOR example
+# Igor example
 
 ## Introduction
 
