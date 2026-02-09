@@ -6,11 +6,11 @@ build-backend = "setuptools.build_meta"
 name = "pynxtools-igor"
 dynamic = ["version"]
 authors = [
-    { name = "The NOMAD Authors" },
+    { name = "The NOMAD authors", email = "fairmat@physik.hu-berlin.de" },
 ]
-description = "pynxtools plugin for reading igor pro waves and packed experiments"
+description = "pynxtools-igor is a pynxtools reader plugin for reading igor pro waves and packed experiments."
 readme = "README.md"
-license= {text = "Apache-2.0"}
+license = { file = "LICENSE" }
 requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3.10",
@@ -28,11 +28,15 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "mypy",
-    "ruff>=0.12.0",
+    "ruff>=0.15.0",
     "pytest",
     "pytest-cov",
+    "pytest-timeout",
     "types-pyyaml",
+    "types-pytz",
+    "types-requests",
     "pre-commit",
+    "cruft",
 ]
 docs = [
     "mkdocs",
@@ -42,16 +46,17 @@ docs = [
     "pymdown-extensions",
     "mkdocs-click"
 ]
+nomad = ["nomad-lab[infrastructure]>=1.4.1"]
 
 [project.urls]
 "Homepage" = "https://github.com/FAIRmat-NFDI/pynxtools-igor"
 "Bug Tracker" = "https://github.com/FAIRmat-NFDI/pynxtools-igor/issues"
 
-[project.entry-points."pynxtools.reader"]
+[project.entry-points.'pynxtools.reader']
 igor = "pynxtools_igor.reader:IgorReader"
 
 [project.entry-points.'nomad.plugin']
-igor_example = "pynxtools_igor.nomad.entrypoints:igor_example"
+igor_example_upload_entry_point = "pynxtools_igor.nomad.example_uploads:igor_example_upload_entry_point"
 
 [tool.setuptools.packages.find]
 where = [
@@ -59,9 +64,11 @@ where = [
 ]
 
 [tool.setuptools_scm]
+version_scheme = "no-guess-dev"
+local_scheme = "node-and-date"
 
 [tool.ruff]
-include = ["src/*.py", "tests/*.py"]
+include = ["src/pynxtools_igor/**/*.py", "tests/**/*.py"]
 line-length = 88
 indent-width = 4
 
@@ -70,7 +77,10 @@ select = [
     "E", # pycodestyle
     "W", # pycodestyle
     "PL", # pylint
-    "NPY201", # upgrade to numpy >2
+    "UP", # pyupgrade
+    "F401", # remove unused import
+    "I001", # sort imports
+    "NPY201", # upgrade numpy v2
 ]
 ignore = [
     "E501", # Line too long ({width} > {limit} characters)
@@ -88,6 +98,7 @@ ignore = [
     "PLR5501", # else-if-used
 ]
 fixable = ["ALL"]
+isort.split-on-trailing-comma = false
 
 [tool.ruff.format]
 quote-style = "double"

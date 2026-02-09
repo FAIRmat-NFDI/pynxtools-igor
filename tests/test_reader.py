@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-"""Tests for the pynxtools MPES reader plugin."""
+"""Tests for the pynxtools Igor reader plugin."""
 
 from pathlib import Path
 from typing import Any

@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-"""Entry points for igor examples."""
+"""Entry points for igor example uploads."""
 
 try:
     from nomad.config.models.plugins import ExampleUploadEntryPoint
@@ -24,7 +24,7 @@ except ImportError as exc:
         "Could not import nomad package. Please install the package 'nomad-lab'.",
     ) from exc
 
-igor_example = ExampleUploadEntryPoint(
+igor_example_upload_entry_point = ExampleUploadEntryPoint(
     title="Igor Reader",
     category="NeXus Experiment Examples",
     description="""
@@ -38,5 +38,5 @@ igor_example = ExampleUploadEntryPoint(
           NeXus format for X-ray diffraction, [NXxrd](https://fairmat-nfdi.github.io/nexus_definitions/classes/contributed_definitions/NXxrd.html).
     """,
     plugin_package="pynxtools_igor",
-    resources=["nomad/examples/*"],
+    resources=["nomad/example_uploads/example/*"],
 )

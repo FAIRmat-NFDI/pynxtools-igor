@@ -18,6 +18,7 @@ A series of tutorials giving you an overview on how to store or convert your XPS
 
 - [Installation guide](tutorial/installation.md)
 - [Standalone usage and examples](tutorial/standalone.md)
+- [Development guide](tutorial/contributing.md)
 
 </div>
 <div markdown="block">
@@ -44,10 +45,16 @@ Here you can learn which options are available for configuring the [igor reader]
 </div>
 </div>
 
+<h2> Contact </h2>
+
+For questions or suggestions:
+
+- Open an issue on the [`pynxtools-igor` GitHub](https://github.com/FAIRmat-NFDI/pynxtools-igor/issues)
+- Join our [Discord channel](https://discord.gg/Gyzx3ukUw8)
+- Get in contact with our [lead developers](contact.md).
+
 <h2>Project and community</h2>
 
-- [NOMAD code guidelines](https://nomad-lab.eu/prod/v1/staging/docs/reference/code_guidelines.html) 
-
-Any questions or suggestions? [Get in touch!](https://www.fair-di.eu/fairmat/about-fairmat/team-fairmat)
+- [NOMAD code guidelines](https://nomad-lab.eu/prod/v1/staging/docs/reference/code_guidelines.html)
 
 [The work is funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) - 460197019 (FAIRmat).](https://gepris.dfg.de/gepris/projekt/460197019?language=en)
