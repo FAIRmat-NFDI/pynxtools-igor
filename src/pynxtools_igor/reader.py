@@ -19,18 +19,18 @@
 
 import logging
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
 
 import numpy as np
+import yaml
 from igor2 import binarywave, packed
 from pynxtools.dataconverter.readers.multi.reader import MultiFormatReader
 from pynxtools.dataconverter.readers.utils import parse_yml
-import yaml
 
 logger = logging.getLogger("pynxtools")
 
 
-def parse_note(bnote: bytes) -> Dict[str, Any]:
+def parse_note(bnote: bytes) -> dict[str, Any]:
     """
     Parsers the note field of the igor binarywave file.
     It assumes that the note field contains key-value pairs of the
@@ -53,7 +53,7 @@ def parse_note(bnote: bytes) -> Dict[str, Any]:
     return notes
 
 
-def axis_from(ibw_data: Dict[str, Any], dim: int) -> np.ndarray:
+def axis_from(ibw_data: dict[str, Any], dim: int) -> np.ndarray:
     """
     Returns the axis values for a given dimension from the wave header.
 
@@ -71,7 +71,7 @@ def axis_from(ibw_data: Dict[str, Any], dim: int) -> np.ndarray:
     )
 
 
-def axis_units_from(ibw_data: Dict[str, Any], dim: int) -> str:
+def axis_units_from(ibw_data: dict[str, Any], dim: int) -> str:
     """ "
     Returns the unit for a given dimension from the wave header.
 
@@ -109,7 +109,7 @@ class IgorReader(MultiFormatReader):
     """Reader for FHI specific igor binarywave files"""
 
     supported_nxdls = ["*"]
-    config_file: Optional[str] = None
+    config_file: str | None = None
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -129,7 +129,7 @@ class IgorReader(MultiFormatReader):
             ".entry": self.handle_entry_files,
         }
 
-    def handle_eln_file(self, file_path: str) -> Dict[str, Any]:
+    def handle_eln_file(self, file_path: str) -> dict[str, Any]:
         self.eln_data = parse_yml(file_path)
         return {}
 
@@ -140,13 +140,13 @@ class IgorReader(MultiFormatReader):
 
         return self.eln_data.get(path)
 
-    def set_config_file(self, file_path: str) -> Dict[str, Any]:
+    def set_config_file(self, file_path: str) -> dict[str, Any]:
         if self.config_file is not None:
             logger.info(f"Config file already set. Skipping the new file {file_path}.")
         self.config_file = file_path
         return {}
 
-    def handle_objects(self, objects: Tuple[Any]) -> Dict[str, Any]:
+    def handle_objects(self, objects: tuple[Any]) -> dict[str, Any]:
         if not isinstance(objects, tuple) or not len(objects) == 1:
             raise ValueError(
                 f"Expect tuple of length 1 as objects, got {type(objects)}",
@@ -157,13 +157,13 @@ class IgorReader(MultiFormatReader):
         self.parse_entry_dict(objects[0])
         return {}
 
-    def handle_entry_files(self, file_path: str) -> Dict[str, Any]:
+    def handle_entry_files(self, file_path: str) -> dict[str, Any]:
         with open(file_path, encoding="utf-8") as file:
             entry_dict = yaml.safe_load(file)
         self.parse_entry_dict(entry_dict)
         return {}
 
-    def parse_entry_dict(self, entry_dict: Dict) -> None:
+    def parse_entry_dict(self, entry_dict: dict) -> None:
         for name, entry in entry_dict.items():
             if not isinstance(entry, dict):
                 raise ValueError(
@@ -177,13 +177,13 @@ class IgorReader(MultiFormatReader):
     def get_attr(self, key: str, path: str) -> Any:
         return self.attrs.get(f"{self.callbacks.entry_name}/{path}")
 
-    def get_entry_names(self) -> List[str]:
+    def get_entry_names(self) -> list[str]:
         if self.entries:
             return self.entries.keys()
         else:
             return ["entry"]
 
-    def get_data_dims(self, key: str, path: str) -> List[str]:
+    def get_data_dims(self, key: str, path: str) -> list[str]:
         return self.data.get(f"{self.callbacks.entry_name}/dims")
 
     def post_process(self) -> None:
@@ -331,11 +331,11 @@ class IgorReader(MultiFormatReader):
                 for key, val in entry_dict["metadata"].items():
                     self.attrs[f"{entry}/{key}"] = val
 
-    def handle_ibw_file(self, file_path: str) -> Dict[str, Any]:
+    def handle_ibw_file(self, file_path: str) -> dict[str, Any]:
         self.ibw_files.append(file_path)
         return {}
 
-    def handle_pxp_file(self, file_path: str) -> Dict[str, Any]:
+    def handle_pxp_file(self, file_path: str) -> dict[str, Any]:
         self.pxp_files.append(file_path)
         return {}
 

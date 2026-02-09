@@ -69,7 +69,7 @@ test_cases: list[tuple[list[str], list[Any], dict[Any, Any], str]] = [
         [],
         {},
         "pxp-to-nxs-with-entry",
-    ),    
+    ),
 ]
 
 test_params: list[Any] = []
