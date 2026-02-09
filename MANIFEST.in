@@ -2,4 +2,4 @@ prune *
 exclude *
 recursive-include src/pynxtools_igor *.py
 include pyproject.toml README.md dev-requirements.txt
-graft src/pynxtools_igor/nomad/examples
+graft src/pynxtools_igor/nomad/example_uploads/example

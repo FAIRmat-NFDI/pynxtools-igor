@@ -1,0 +1,36 @@
+{
+  "template": "git@github.com:FAIRmat-NFDI/pynxtools-plugin-template.git",
+  "commit": "6e257e9df1a74c78595bf45d50c27c4774f3a5f5",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "reader_name": "igor",
+      "supported_nxdl": "*",
+      "short_description": "pynxtools-igor is a pynxtools reader plugin for data stored with Wavemetrics Igor Pro",
+      "technique": "igor",
+      "reader_class": "IgorReader",
+      "author_name": "The NOMAD Authors",
+      "author_email": "fairmat@physik.hu-berlin.de",
+      "github_username": "",
+      "organization_name": "fairmat-nfdi",
+      "license": "Apache Software License 2.0",
+      "zenodo_record": "15083998",
+      "vscode_settings": true,
+      "include_nomad_app": false,
+      "include_nomad_example_upload": true,
+      "include_north_tools": false,
+      "north_tool_name": "igor",
+      "__package_name": "pynxtools-igor",
+      "__module_name": "pynxtools_igor",
+      "__nomad_example": "igor_example_upload_entry_point",
+      "__nomad_app": "igor_app_entry_point",
+      "__north_tool_EP_name": "north_tool",
+      "_copy_without_render": [
+        "*.html"
+      ],
+      "_template": "git@github.com:FAIRmat-NFDI/pynxtools-plugin-template.git",
+      "_commit": "6e257e9df1a74c78595bf45d50c27c4774f3a5f5"
+    }
+  },
+  "directory": null
+}
