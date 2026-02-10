@@ -1,7 +1,6 @@
 {
   "template": "git@github.com:FAIRmat-NFDI/pynxtools-plugin-template.git",
-  "commit": "69acfe00f37e2eec127192ca8acd2699337f5cee",
-  "checkout": "cosmetic-fixes",
+  "commit": "6e257e9df1a74c78595bf45d50c27c4774f3a5f5",
   "context": {
     "cookiecutter": {
       "reader_name": "igor",
