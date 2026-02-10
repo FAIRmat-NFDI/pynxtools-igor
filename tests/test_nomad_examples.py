@@ -18,24 +18,24 @@
 """Test for NOMAD examples in igor reader plugin."""
 
 import os
+
 import pytest
 
 try:
-    import nomad
+    import nomad  # noqa: F401
 except ImportError:
     pytest.skip(
-        "Skipping NOMAD example tests because nomad is not installed",
+        "Skipping NOMAD example tests because nomad-lab is not installed",
         allow_module_level=True,
     )
 
 from pynxtools.testing.nomad_example import (
+    example_upload_entry_point_valid,
     get_file_parameter,
     parse_nomad_examples,
-    example_upload_entry_point_valid,
 )
 
-from pynxtools_igor.nomad.entrypoints import igor_example
-
+from pynxtools_igor.nomad.example_uploads import igor_example_upload_entry_point
 
 EXAMPLE_PATH = os.path.join(
     os.path.dirname(__file__),
@@ -43,7 +43,8 @@ EXAMPLE_PATH = os.path.join(
     "src",
     "pynxtools_igor",
     "nomad",
-    "examples",
+    "example_uploads",
+    "example",
 )
 
 
@@ -60,9 +61,9 @@ def test_parse_nomad_examples(mainfile):
     ("entrypoint", "example_path"),
     [
         pytest.param(
-            igor_example,
+            igor_example_upload_entry_point,
             EXAMPLE_PATH,
-            id="igor_example",
+            id="igor_example_upload_entry_point",
         ),
     ],
 )
