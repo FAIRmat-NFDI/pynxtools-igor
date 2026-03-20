@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-"""Test for NOMAD examples in igor reader plugin."""
+"""Tests for the NOMAD examples."""
 
 import os
 
@@ -35,7 +35,7 @@ from pynxtools.testing.nomad_example import (
     parse_nomad_examples,
 )
 
-from pynxtools_igor.nomad.example_uploads import igor_example_upload_entry_point
+from pynxtools_igor.nomad.example_uploads import igor_example_upload
 
 EXAMPLE_PATH = os.path.join(
     os.path.dirname(__file__),
@@ -61,9 +61,9 @@ def test_parse_nomad_examples(mainfile):
     ("entrypoint", "example_path"),
     [
         pytest.param(
-            igor_example_upload_entry_point,
+            igor_example_upload,
             EXAMPLE_PATH,
-            id="igor_example_upload_entry_point",
+            id="igor_example_upload",
         ),
     ],
 )

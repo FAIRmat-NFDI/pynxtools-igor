@@ -1,6 +1,6 @@
 {
   "template": "git@github.com:FAIRmat-NFDI/pynxtools-plugin-template.git",
-  "commit": "fd28d9fbb5463af44d47d8cdee098f854f3751e6",
+  "commit": "39ae64305e0f3c696003eab5cca56b49ecaf883f",
   "context": {
     "cookiecutter": {
       "reader_name": "igor",
@@ -21,14 +21,14 @@
       "north_tool_name": "igor",
       "__package_name": "pynxtools-igor",
       "__module_name": "pynxtools_igor",
-      "__nomad_example": "igor_example_upload_entry_point",
-      "__nomad_app": "igor_app_entry_point",
-      "__north_tool_entry_point": "igor_north_tool_entry_point",
+      "__nomad_example": "igor_example_upload",
+      "__nomad_app": "igor_app",
+      "__nomad_north_tool": "igor_north_tool",
       "_copy_without_render": [
         "*.html"
       ],
       "_template": "git@github.com:FAIRmat-NFDI/pynxtools-plugin-template.git",
-      "_commit": "fd28d9fbb5463af44d47d8cdee098f854f3751e6"
+      "_commit": "39ae64305e0f3c696003eab5cca56b49ecaf883f"
     }
   },
   "directory": null,

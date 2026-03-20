@@ -24,7 +24,7 @@ except ImportError as exc:
         "Could not import nomad package. Please install the package 'nomad-lab'.",
     ) from exc
 
-igor_example_upload_entry_point = ExampleUploadEntryPoint(
+igor_example_upload = ExampleUploadEntryPoint(
     title="Igor Reader",
     category="NeXus Experiment Examples",
     description="""

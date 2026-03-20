@@ -16,11 +16,9 @@ This `pynxtools` plugin was generated with [`cookiecutter`](https://github.com/c
 
 ## Installation
 
-It is recommended to use python 3.12 with a dedicated virtual environment for this package.
-Learn how to manage [python versions](https://github.com/pyenv/pyenv) and
-[virtual environments](https://realpython.com/python-virtual-environments-a-primer/).
+It is recommended to use python 3.12 with a dedicated virtual environment for this package. Learn how to manage [python versions](https://github.com/pyenv/pyenv) and [virtual environments](https://realpython.com/python-virtual-environments-a-primer/).
 
-This package is a reader plugin for [`pynxtools`](https://github.com/FAIRmat-NFDI/pynxtools) and can be installed together with `pynxtools`:
+This package is a reader plugin for [`pynxtools`](https://github.com/FAIRmat-NFDI/pynxtools) and should be installed together with `pynxtools`:
 
 ```shell
 uv pip install pynxtools[igor]

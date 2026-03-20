@@ -56,7 +56,7 @@ nomad = ["nomad-lab[infrastructure]>=1.4.1"]
 igor = "pynxtools_igor.reader:IgorReader"
 
 [project.entry-points.'nomad.plugin']
-igor_example_upload_entry_point = "pynxtools_igor.nomad.example_uploads:igor_example_upload_entry_point"
+igor_example_upload = "pynxtools_igor.nomad.example_uploads:igor_example_upload"
 
 [tool.uv]
 extra-index-url = [
