@@ -40,6 +40,7 @@ from pynxtools_igor.nomad.example_uploads import igor_example_upload
 EXAMPLE_PATH = os.path.join(
     os.path.dirname(__file__),
     "..",
+    "..",
     "src",
     "pynxtools_igor",
     "nomad",
