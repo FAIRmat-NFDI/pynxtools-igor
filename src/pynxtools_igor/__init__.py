@@ -24,6 +24,6 @@ def get_pynxtools_igor_version() -> str:
     # for a discussion whether to collect at build or runtime see
     # https://discuss.python.org/t/please-make-package-version-go-away/58501
     try:
-        return importlib.metadata.version(pynxtools_igor)
+        return importlib.metadata.version("pynxtools-igor")
     except importlib.metadata.PackageNotFoundError:
         return f"unknown_version"
