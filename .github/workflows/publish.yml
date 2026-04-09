@@ -72,7 +72,7 @@ jobs:
     name: Build Package
     needs:
       - compare-versions
-      - test 
+      - test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
