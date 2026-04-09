@@ -12,7 +12,7 @@
       "author_email": "fairmat@physik.hu-berlin.de",
       "github_username": "",
       "organization_name": "fairmat-nfdi",
-      "license": "Apache Software License 2.0",
+      "license": "MIT",
       "zenodo_record": "15083998",
       "vscode_settings": true,
       "include_nomad_app": false,
