@@ -1,0 +1,9 @@
+Using igor reader to convert the given files:  
+• config_file.json
+• Fig2a.pxp
+• Scan57_59.yaml.entry
+WARNING: Units provided for path: '/ENTRY[Scan57]/DATA[data]/AXISNAME[l]/@units' are not valid. Please provide a valid unit.
+WARNING: Units provided for path: '/ENTRY[Scan57]/DATA[data]/DATA[data]/@units' are not valid. Please provide a valid unit.
+WARNING: Units provided for path: '/ENTRY[Scan59]/DATA[data]/AXISNAME[l]/@units' are not valid. Please provide a valid unit.
+WARNING: Units provided for path: '/ENTRY[Scan59]/DATA[data]/DATA[data]/@units' are not valid. Please provide a valid unit.
+The output file generated: example_pxp.nxs.

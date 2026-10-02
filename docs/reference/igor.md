@@ -18,8 +18,7 @@ Example data for the igor reader is available [here](https://github.com/FAIRmat-
 
 The example conversion can be run with the following command.
 ```console
-user@box:~$ 
-dataconverter --reader igor --nxdl NXroot --output example_pxp.nxs config_file.json Fig2a.pxp Scan57_59.yaml.entry
+pynx convert --reader igor --nxdl NXroot --output example_pxp.nxs config_file.json Fig2a.pxp Scan57_59.yaml.entry
 ```
 
 The reader is a tailored parser for research data in a common format. This particular example is able to read and map HDF5 files, as well as JSON and YAML files. Feel free to contact FAIRmat if you want to create a parser for your research data.

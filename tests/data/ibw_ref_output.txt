@@ -1,0 +1,5 @@
+Using igor reader to convert the given files:  
+• config_file.json
+• Norm_0057.ibw
+• Norm_0059.ibw
+The output file generated: example_ibw.nxs.

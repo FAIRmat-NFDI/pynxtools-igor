@@ -23,7 +23,7 @@ See [the installation guide](./installation.md) for how to install `pynxtools` t
 
 An example script to run the igor reader in `pynxtools`:
 ```sh
- ! dataconverter \
+ ! pynx convert \
 --reader igor \
 --nxdl NXroot \
 $<igor-file path> \
@@ -42,7 +42,7 @@ There are also small example files for using the `pynxtools` dataconverter with 
 For this tutorial, we will work with this data. You can run the conversion as
 
 ```shell
-dataconverter \\
+pynx convert \\
     --reader igor \\
     --nxdl NXroot \\
     Norm_0057.ibw \\

@@ -200,5 +200,6 @@ cython_debug/
 build/
 .python-version
 !.cspell/custom-dictionary.txt
+!tests/data/*ref_output.txt
 *.nxs
 *.entry

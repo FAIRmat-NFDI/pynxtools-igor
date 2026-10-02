@@ -1,0 +1,7 @@
+Using igor reader to convert the given files:  
+• config_file.json
+• Norm_0057.ibw
+• Norm_0059.ibw
+• Norm57.yaml.entry
+WARNING: Units provided for path: '/ENTRY[Scan57]/DATA[data]/DATA[data]/@units' are not valid. Please provide a valid unit.
+The output file generated: example_ibw_entry.nxs.
