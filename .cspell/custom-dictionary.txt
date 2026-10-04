@@ -45,6 +45,7 @@ nxdl
 nxdls
 orcid
 pymdownx
+pynx
 pynxtools
 rettigl
 superfences
