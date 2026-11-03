@@ -21,8 +21,11 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from igor2 import binarywave
 from pynxtools.dataconverter.convert import get_reader
 from pynxtools.testing.nexus_conversion import ReaderTest
+
+from pynxtools_igor.reader import parse_note
 
 READER_NAME = "igor"
 READER_CLASS = get_reader(READER_NAME)
@@ -145,3 +148,30 @@ def test_nexus_conversion(  # noqa: PLR0917
     test.check_reproducibility_of_nexus(
         ignore_lines=ignore_lines, ignore_sections=ignore_sections
     )
+
+
+def test_parse_note_keeps_values_with_spaces():
+    """Wave-note values with spaces or "=" must survive (B14)."""
+    note = b"DATE=2018 4 26;HOUR=16:13:14;\r\nCOMMENT=a=b c\nnot a pair\na=1 b=2"
+    assert parse_note(note) == {
+        "DATE": "2018 4 26",
+        "HOUR": "16:13:14",
+        "COMMENT": "a=b c",
+        "a": "1",
+        "b": "2",
+    }
+
+
+def test_parse_note_of_example_ibw():
+    """All pairs of the ;-separated note in the example file are read (B14)."""
+    notes = parse_note(
+        binarywave.load(Path(__file__).parent / "data" / "Norm_0057.ibw")["wave"][
+            "note"
+        ]
+    )
+    assert notes["SCAN_N"] == "57"
+    assert notes["HOUR"] == "16:13:14"
+    # tests/data/Norm_0057.ibw was written with a Korean locale:
+    # its DATE note entry is "2018년 4 26일 목" (year, month, day, weekday).
+    assert notes["DATE"].startswith("2018")
+    assert " 4 26" in notes["DATE"]

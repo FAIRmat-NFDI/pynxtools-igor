@@ -18,6 +18,7 @@
 """Igor pro reader implementation for the DataConverter."""
 
 import logging
+import re
 from pathlib import Path
 from typing import Any
 
@@ -34,7 +35,9 @@ def parse_note(bnote: bytes) -> dict[str, Any]:
     """
     Parsers the note field of the igor binarywave file.
     It assumes that the note field contains key-value pairs of the
-    form 'key=value' separated by newlines.
+    form 'key=value' separated by newlines, semicolons, or
+    whitespace before the next 'key='. Values may contain spaces
+    and further '=' characters.
 
     Args:
         bnote (bytes): The bytes of the binarywave note field.
@@ -44,11 +47,10 @@ def parse_note(bnote: bytes) -> dict[str, Any]:
     """
     note = bnote.decode("utf-8").replace("\r", "\n")
     notes = {}
-    for line in note.split():
-        split = line.split("=")
-        if len(split) == 2:
-            key, val = split
-            notes[key] = val
+    for line in re.split(r"[;\n]+|\s+(?=[^\s;=]+=)", note):
+        key, sep, val = line.partition("=")
+        if sep and key.strip():
+            notes[key.strip()] = val.strip()
 
     return notes
 
