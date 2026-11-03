@@ -19,6 +19,7 @@
 
 import logging
 import re
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -201,6 +202,7 @@ class IgorReader(MultiFormatReader):
             )
         if len(self.ibw_files):
             # parse ibw files
+            self.ibw_entry_names = self.derive_ibw_entry_names()
             for file in self.ibw_files:
                 self.process_ibw_files(file)
             return
@@ -208,6 +210,53 @@ class IgorReader(MultiFormatReader):
         if len(self.pxp_files):
             # parse single pxp file
             self.process_pxp_files(self.pxp_files[0])
+
+    def derive_ibw_entry_names(self) -> dict[str, str]:
+        """
+        Entry names for ibw files that no entry file assigns to an entry.
+
+        The name is the file name without its extension. If several files
+        share that name, parent folder names are prepended, one level at a
+        time, until the names are unique (x/scan.ibw and y/scan.ibw become
+        x_scan and y_scan; a/data/scan.ibw and b/data/scan.ibw become
+        a_data_scan and b_data_scan). The same file given twice is only
+        read once.
+        """
+        # resolve every path once; drop exact duplicates
+        resolved: dict[Path, str] = {}
+        for file in self.ibw_files:
+            path = Path(file).resolve()
+            if path in resolved:
+                logger.warning(f"{file} was given more than once; reading it once.")
+            else:
+                resolved[path] = file
+        self.ibw_files = list(resolved.values())
+
+        assigned = {ed.get("data", "") for ed in self.entries.values()}
+        taken = set(self.entries)
+        # per unassigned file: its folders (innermost last), stem and depth
+        folders = {
+            file: path.parent.parts[1:]
+            for path, file in resolved.items()
+            if path.name not in assigned
+        }
+        names = {file: Path(file).stem for file in folders}
+        depth = dict.fromkeys(folders, 0)
+
+        while True:
+            counts = Counter(names.values())
+            clashing = [f for f, n in names.items() if counts[n] > 1 or n in taken]
+            if not clashing:
+                return names
+            for file in clashing:
+                if depth[file] == len(folders[file]):
+                    raise ValueError(
+                        "Could not derive unique entry names for "
+                        f"{', '.join(clashing)}. Assign them to entries in an "
+                        "entry file."
+                    )
+                depth[file] += 1
+                names[file] = f"{folders[file][-depth[file]]}_{names[file]}"
 
     def process_ibw_files(self, file: str) -> None:
         # We look for and entry with corresponding file name.
@@ -220,7 +269,7 @@ class IgorReader(MultiFormatReader):
                 break
         # Otherwise, we create an entry with the ibw file name as entry name
         if not entry:
-            entry = Path(file).name.split(".")[0]
+            entry = self.ibw_entry_names[file]
             self.entries[entry] = {}
 
         ibw = binarywave.load(file)
