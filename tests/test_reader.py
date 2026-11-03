@@ -152,11 +152,13 @@ def test_nexus_conversion(  # noqa: PLR0917
 
 def test_parse_note_keeps_values_with_spaces():
     """Wave-note values with spaces or "=" must survive (B14)."""
-    note = b"DATE=2018 4 26;HOUR=16:13:14;\r\nCOMMENT=a=b c\nnot a pair"
+    note = b"DATE=2018 4 26;HOUR=16:13:14;\r\nCOMMENT=a=b c\nnot a pair\na=1 b=2"
     assert parse_note(note) == {
         "DATE": "2018 4 26",
         "HOUR": "16:13:14",
         "COMMENT": "a=b c",
+        "a": "1",
+        "b": "2",
     }
 
 
