@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+import yaml
 from igor2 import binarywave
 from pynxtools.dataconverter.convert import get_reader
 from pynxtools.dataconverter.template import Template
@@ -210,19 +211,19 @@ def test_ibw_entry_names_keep_dots(tmp_path):
 def test_ibw_same_name_in_different_folders(tmp_path):
     """Same file name in two folders: the folder name is prepended (B31)."""
     # x/scan.ibw and y/scan.ibw would both be "scan", so both files get their
-    # folder name in front: x_scan and y_scan.
+    # folder name in front: x__scan and y__scan.
     files = _copy_example_ibw(tmp_path / "x" / "scan.ibw", tmp_path / "y" / "scan.ibw")
-    assert _ibw_entries(*files) == {"x_scan", "y_scan"}
+    assert _ibw_entries(*files) == {"x__scan", "y__scan"}
 
 
 def test_ibw_same_folder_name_adds_more_folders(tmp_path):
     """If folder_name still clashes, the next folder level is prepended (B31)."""
-    # a/data/scan.ibw and b/data/scan.ibw would both be "data_scan", so one
-    # more folder level is added: a_data_scan and b_data_scan.
+    # a/data/scan.ibw and b/data/scan.ibw would both be "data__scan", so one
+    # more folder level is added: a__data__scan and b__data__scan.
     files = _copy_example_ibw(
         tmp_path / "a" / "data" / "scan.ibw", tmp_path / "b" / "data" / "scan.ibw"
     )
-    assert _ibw_entries(*files) == {"a_data_scan", "b_data_scan"}
+    assert _ibw_entries(*files) == {"a__data__scan", "b__data__scan"}
 
 
 def test_ibw_same_file_twice_is_read_once(tmp_path):
@@ -231,3 +232,30 @@ def test_ibw_same_file_twice_is_read_once(tmp_path):
     # input: the file is read once (with a warning), not into two entries.
     (file,) = _copy_example_ibw(tmp_path / "scan.ibw")
     assert _ibw_entries(file, file) == {"scan"}
+
+
+def _entry_file(tmp_path: Path, entries: dict[str, Any]) -> Path:
+    """Write an igor entry file (yaml) and return its path."""
+    entry_file = tmp_path / "scans.yaml.entry"
+    entry_file.write_text(yaml.safe_dump(entries), encoding="utf-8")
+    return entry_file
+
+
+def test_entry_file_name_matching_several_ibw_files_raises(tmp_path):
+    """An entry file name that fits several ibw files must raise an error (B31)."""
+    # x/scan.ibw and y/scan.ibw both end in "scan.ibw", so an entry file with
+    # data: scan.ibw used to put both files into the same entry, and the
+    # second overwrote the first.
+    files = _copy_example_ibw(tmp_path / "x" / "scan.ibw", tmp_path / "y" / "scan.ibw")
+    entry_file = _entry_file(tmp_path, {"my_scan": {"data": "scan.ibw"}})
+    with pytest.raises(ValueError, match=r"matches several files"):
+        _ibw_entries(*files, entry_file)
+
+
+def test_entry_file_accepts_path_with_folder(tmp_path):
+    """An entry file can name an ibw file by a path with its folder (B31)."""
+    # data: x/scan.ibw picks exactly one of the two files; the other one gets
+    # an entry name derived from its file name.
+    files = _copy_example_ibw(tmp_path / "x" / "scan.ibw", tmp_path / "y" / "scan.ibw")
+    entry_file = _entry_file(tmp_path, {"my_scan": {"data": "x/scan.ibw"}})
+    assert _ibw_entries(*files, entry_file) == {"my_scan", "scan"}
