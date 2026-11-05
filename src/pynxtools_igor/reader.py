@@ -19,6 +19,7 @@
 
 import logging
 import re
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -201,6 +202,7 @@ class IgorReader(MultiFormatReader):
             )
         if len(self.ibw_files):
             # parse ibw files
+            self.ibw_entry_names = self.derive_ibw_entry_names()
             for file in self.ibw_files:
                 self.process_ibw_files(file)
             return
@@ -209,19 +211,80 @@ class IgorReader(MultiFormatReader):
             # parse single pxp file
             self.process_pxp_files(self.pxp_files[0])
 
+    def derive_ibw_entry_names(self) -> dict[str, str]:
+        """
+        Entry name for every ibw file.
+
+        A file that an entry file assigns (via its "data" key) gets that entry.
+        "data" can be the file name (scan.ibw) or a path ending in it
+        (x/scan.ibw); if it matches more than one file, an error asks for a
+        longer path. Every other file is named after its file name without the
+        extension. If several files share that name, parent folder names are
+        prepended with "__", one level at a time, until the names are unique
+        (x/scan.ibw and y/scan.ibw become x__scan and y__scan; a/data/scan.ibw
+        and b/data/scan.ibw become a__data__scan and b__data__scan). The same
+        file given twice is only read once.
+        """
+        # resolve every path once; drop exact duplicates
+        resolved: dict[Path, str] = {}
+        for file in self.ibw_files:
+            path = Path(file).resolve()
+            if path in resolved:
+                logger.warning(f"{file} was given more than once; reading it once.")
+            else:
+                resolved[path] = file
+        self.ibw_files = list(resolved.values())
+
+        # files assigned in an entry file: "data" must match exactly one file
+        names: dict[str, str] = {}
+        for entry, entry_dict in self.entries.items():
+            data_parts = Path(entry_dict.get("data", "")).parts
+            if not data_parts:
+                continue
+            matches = [
+                file
+                for path, file in resolved.items()
+                if path.parts[-len(data_parts) :] == data_parts
+            ]
+            if len(matches) > 1:
+                raise ValueError(
+                    f"Entry '{entry}' refers to '{entry_dict['data']}', which "
+                    f"matches several files: {', '.join(matches)}. Use a path "
+                    "that includes the folder name (e.g. x/scan.ibw) in the "
+                    "entry file."
+                )
+            for file in matches:
+                names[file] = entry
+
+        # all other files: name from the file name, plus folders if needed
+        taken = set(self.entries)
+        folders = {
+            file: path.parent.parts[1:]
+            for path, file in resolved.items()
+            if file not in names
+        }
+        derived = {file: Path(file).stem for file in folders}
+        depth = dict.fromkeys(folders, 0)
+
+        while True:
+            counts = Counter(derived.values())
+            clashing = [f for f, n in derived.items() if counts[n] > 1 or n in taken]
+            if not clashing:
+                return names | derived
+            for file in clashing:
+                if depth[file] == len(folders[file]):
+                    raise ValueError(
+                        "Could not derive unique entry names for "
+                        f"{', '.join(clashing)}. Assign them to entries in an "
+                        "entry file."
+                    )
+                depth[file] += 1
+                derived[file] = f"{folders[file][-depth[file]]}__{derived[file]}"
+
     def process_ibw_files(self, file: str) -> None:
-        # We look for and entry with corresponding file name.
-        entry = ""
-        entry_dict = {}
-        for en, ed in self.entries.items():
-            if ed.get("data", "") == Path(file).name:
-                entry = en
-                entry_dict = ed
-                break
-        # Otherwise, we create an entry with the ibw file name as entry name
-        if not entry:
-            entry = Path(file).name.split(".")[0]
-            self.entries[entry] = {}
+        # entry from the entry file, or one derived from the file name
+        entry = self.ibw_entry_names[file]
+        entry_dict = self.entries.setdefault(entry, {})
 
         ibw = binarywave.load(file)
         # read wave notes
